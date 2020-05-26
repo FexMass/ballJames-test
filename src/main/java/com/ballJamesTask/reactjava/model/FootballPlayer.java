@@ -1,59 +1,28 @@
 package com.ballJamesTask.reactjava.model;
 
+import lombok.*;
+
+import java.math.BigDecimal;
+
 /**
  *
  */
+@Getter
+@Setter
+@NoArgsConstructor
+@ToString
 public class FootballPlayer {
 
-    private String id;
+    private int id;
     private String teamId;
     private String shirtNumber;
+    private BigDecimal maxSpeed;
+    private BigDecimal lengthRun;
 
-    /**
-     *
-     * @return
-     */
-    public String getId() {
-        return id;
+    public BigDecimal getMaxSpeed() {
+        return maxSpeed == null ? BigDecimal.valueOf(0) : maxSpeed;
     }
-
-    /**
-     *
-     * @param id
-     */
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getTeamId() {
-        return teamId;
-    }
-
-    /**
-     *
-     * @param teamId
-     */
-    public void setTeamId(String teamId) {
-        this.teamId = teamId;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getShirtNumber() {
-        return shirtNumber;
-    }
-
-    /**
-     *
-     * @param shirtNumber
-     */
-    public void setShirtNumber(String shirtNumber) {
-        this.shirtNumber = shirtNumber;
+    public BigDecimal getLengthRun() {
+        return lengthRun == null ? BigDecimal.valueOf(0) : lengthRun;
     }
 }
