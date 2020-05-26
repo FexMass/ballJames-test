@@ -7,4 +7,8 @@ public class FinalResult {
     public FinalResult(GameInformation gameInformation) {
         this.gameInformation = gameInformation;
     }
+
+    public GameInformation getFinalResult() {
+        return this.gameInformation;
+    }
 }
