@@ -1,6 +1,8 @@
 package com.ballJamesTask.reactjava.model;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -8,19 +10,26 @@ import java.util.List;
 public class GameInformation {
 
     //public problem ?
-    public List<HalfTimeInformation> halfTimeInformationList;
-    public static List<FootballPlayer> footballPlayerList;
+    private List<HalfTimeInformation> halfTimeInformationList;
+    private List<FootballPlayer> footballPlayerList;
+    private HashMap<Integer, FootballPlayer> kurac;
 
     /**
-     *
      * @return
      */
     public List<HalfTimeInformation> getHalfTimeInformationList() {
         return halfTimeInformationList;
     }
 
+    public void kurac(List<FootballPlayer> list) {
+        Map<Integer, FootballPlayer> map = new HashMap();
+
+        for (FootballPlayer fp : list) {
+            map.put(fp.getId(), fp);
+        }
+    }
+
     /**
-     *
      * @param halfTimeInformationList
      */
     public void setHalfTimeInformationList(List<HalfTimeInformation> halfTimeInformationList) {
@@ -28,7 +37,6 @@ public class GameInformation {
     }
 
     /**
-     *
      * @return
      */
     public List<FootballPlayer> getFootballPlayerList() {
@@ -36,11 +44,10 @@ public class GameInformation {
     }
 
     /**
-     *
      * @param footballPlayerList
      */
     public void setFootballPlayerList(List<FootballPlayer> footballPlayerList) {
-        GameInformation.footballPlayerList = footballPlayerList;
+        this.footballPlayerList = footballPlayerList;
     }
 
 
