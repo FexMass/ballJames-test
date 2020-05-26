@@ -18,7 +18,7 @@ public class DataController {
         this.dataLoaderService = dataLoaderService;
     }
 
-    @GetMapping()
+    @GetMapping("/gameInformation")
     public ResponseEntity<FinalResult> getData(String txtPath, String xmlPath) {
         txtPath = "";
         xmlPath = "C:\\Development\\ballJames-test\\src\\main\\resources\\20200223_Heracles_vs_Ajax_20200223_Heracles_vs_Ajax[8730].xml";
