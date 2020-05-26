@@ -1,6 +1,6 @@
 package com.ballJamesTask.reactjava.controller;
 
-import com.ballJamesTask.reactjava.model.GameInformation;
+import com.ballJamesTask.reactjava.model.FinalResult;
 import com.ballJamesTask.reactjava.service.DataLoaderService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,36 +10,21 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping
-public class RestController {
+public class DataController {
 
     private DataLoaderService dataLoaderService;
 
-
-    public RestController(DataLoaderService dataLoaderService) {
+    public DataController(DataLoaderService dataLoaderService) {
         this.dataLoaderService = dataLoaderService;
     }
 
     @GetMapping()
-    public ResponseEntity<GameInformation> getData(String txtPath, String xmlPath) {
-
+    public ResponseEntity<FinalResult> getData(String txtPath, String xmlPath) {
         txtPath = "";
-        xmlPath = "";
+        xmlPath = "C:\\Development\\ballJames-test\\src\\main\\resources\\20200223_Heracles_vs_Ajax_20200223_Heracles_vs_Ajax[8730].xml";
 
         try {
             return new ResponseEntity<>(dataLoaderService.getAllMatchData(txtPath, xmlPath), HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-    }
-
-    @GetMapping()
-    public ResponseEntity<GameInformation> getBallData(String txtPath, String xmlPath) {
-
-        txtPath = "";
-        xmlPath = "";
-
-        try {
-            return new ResponseEntity<>(dataLoaderService.getAllBallData(txtPath, xmlPath), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
