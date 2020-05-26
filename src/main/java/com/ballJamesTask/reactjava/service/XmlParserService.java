@@ -7,18 +7,25 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.xml.sax.Attributes;
+import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  *
  */
 @Service
-public class XmlParser extends DefaultHandler {
+public class XmlParserService extends DefaultHandler {
 
-    private static final Logger log = LoggerFactory.getLogger(XmlParser.class);
+    private static final Logger log = LoggerFactory.getLogger(XmlParserService.class);
 
     private static final String START = "Start";
     private static final String END = "End";
@@ -29,12 +36,18 @@ public class XmlParser extends DefaultHandler {
     private static final String SHIRT_NUMBER = "ShirtNumber";
 
     private static final String SESSIONS = "Sessions";
-    private static final String SESSION = "GameInformation";
+    private static final String SESSION = "Session";
     private static final String PLAYERS = "Players";
     private static final String PLAYER = "Player";
 
     private GameInformation gameInformation;
     private String elementValue;
+
+    private final SAXParser saxParser;
+
+    public XmlParserService() throws ParserConfigurationException, SAXException {
+        this.saxParser = SAXParserFactory.newInstance().newSAXParser();
+    }
 
     /**
      *
@@ -67,21 +80,15 @@ public class XmlParser extends DefaultHandler {
         if (SESSIONS.equals(qName)) {
             gameInformation.setHalfTimeInformationList(new ArrayList<>());
         } else if (SESSION.equals(qName)) {
-            System.out.println(54555);
-            gameInformation.g.add(new HalfTimeInformation());
+            gameInformation.getHalfTimeInformationList().add(new HalfTimeInformation());
         } else if (PLAYERS.equals(qName)) {
-            gameInformation.footballPlayerList = new ArrayList<>();
+            gameInformation.setFootballPlayerList(new ArrayList<>());
         } else if (PLAYER.equals(qName)) {
             FootballPlayer footballPlayer = new FootballPlayer();
-            footballPlayer.setId(attr.getValue("id"));
+            footballPlayer.setId(Integer.parseInt(attr.getValue("id")));
             footballPlayer.setTeamId("teamId");
-            gameInformation.footballPlayerList.add(footballPlayer);
+            gameInformation.getFootballPlayerList().add(footballPlayer);
         }
-
-        gameInformation.getHalfTimeInformationList().
-
-        latestInformation(gameInformation.getHalfTimeInformationList());
-        gameInformation.getHalfTimeInformationList().get(gameInformation.getHalfTimeInformationList().size()-1)
     }
 
     /**
@@ -121,7 +128,8 @@ public class XmlParser extends DefaultHandler {
      *
      * @return
      */
-    private HalfTimeInformation latestInformation(List<HalfTimeInformation> halfTimeInformationList) {
+    private HalfTimeInformation latestInformation() {
+        List<HalfTimeInformation> halfTimeInformationList = gameInformation.getHalfTimeInformationList();
         int latestOtherInformationIndex = halfTimeInformationList.size() - 1;
         return halfTimeInformationList.get(latestOtherInformationIndex);
     }
@@ -131,13 +139,19 @@ public class XmlParser extends DefaultHandler {
      * @return
      */
     private FootballPlayer latestPlayer() {
-        List<FootballPlayer> footballPlayerList = gameInformation.footballPlayerList;
+        List<FootballPlayer> footballPlayerList = gameInformation.getFootballPlayerList();
         int latestFootballPlayerIndex = footballPlayerList.size() - 1;
         return footballPlayerList.get(latestFootballPlayerIndex);
     }
 
-   public GameInformation getGameInformation() {
-        return this.gameInformation;
+   GameInformation getGameInformation(String inputFile) {
+       try {
+           //TODO file from client upload
+           saxParser.parse(Objects.requireNonNull(this.getClass().getClassLoader().getResourceAsStream("20200223_Heracles_vs_Ajax_20200223_Heracles_vs_Ajax[8730].xml")), this);
+           gameInformation.playersMap(gameInformation.getFootballPlayerList());
+       } catch (Exception e) {
+           e.printStackTrace();
+       }
+       return gameInformation;
    }
-
 }
