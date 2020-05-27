@@ -8,6 +8,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * Rest Controller with one method for receiving CSV and XML file to be processed and result to be returned to Client
+ * @author Mass
+ */
 @RestController
 @RequestMapping
 public class DataController {
@@ -18,6 +22,12 @@ public class DataController {
         this.dataLoaderService = dataLoaderService;
     }
 
+    /**
+     * @param txtPath path to CSV file which contains match data
+     * @param xmlPath path to XML file which describes CSV file and contains other information
+     * @return ResponseEntity object which is filled with all data <FinalResult>
+     * @see FinalResult
+     */
     @GetMapping("/gameInformation")
     public ResponseEntity<FinalResult> getData(String txtPath, String xmlPath) {
         txtPath = "";

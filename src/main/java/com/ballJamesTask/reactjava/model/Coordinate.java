@@ -6,6 +6,10 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 
+/**
+ * Class representing one location(x, y, z) and velocity [m/s] of player or a ball
+ * @author Mass
+ */
 @Getter
 @Setter
 @AllArgsConstructor

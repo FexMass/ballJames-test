@@ -13,14 +13,15 @@ import org.xml.sax.helpers.DefaultHandler;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 /**
- *
+ * Service for parsing XML file and getting data from it to store it.
+ * Class extends DefaultHandler Class to override certain needed methods for parsing.
+ * @author Mass
+ * @see DefaultHandler
  */
 @Service
 public class XmlParserService extends DefaultHandler {
@@ -50,7 +51,8 @@ public class XmlParserService extends DefaultHandler {
     }
 
     /**
-     *
+     * Overridden method which is invoked when parsing begins and constructing new GameInformation object
+     * @see GameInformation
      */
     @Override
     public void startDocument() {
@@ -58,10 +60,8 @@ public class XmlParserService extends DefaultHandler {
     }
 
     /**
-     *
-     * @param ch
-     * @param start
-     * @param length
+     * Overridden Method receives characters with boundaries.
+     * Converting those characters into String.
      */
     @Override
     public void characters(char[] ch, int start, int length) {
@@ -69,11 +69,9 @@ public class XmlParserService extends DefaultHandler {
     }
 
     /**
-     *
-     * @param uri
-     * @param lName
-     * @param qName
-     * @param attr
+     * Overridden method which is invoked when the parsing begins for an element.
+     * @param qName holds the name of the tag in the XML
+     * @param attr holds the value if needed from attribute of a XML tag
      */
     @Override
     public void startElement(String uri, String lName, String qName, Attributes attr) {
@@ -92,10 +90,8 @@ public class XmlParserService extends DefaultHandler {
     }
 
     /**
-     *
-     * @param uri
-     * @param localName
-     * @param qName
+     * Overridden method which is invoked when the parsing ends for an element.
+     * @param qName holds the name of the tag in the XML
      */
     @Override
     public void endElement(String uri, String localName, String qName) {
@@ -125,8 +121,9 @@ public class XmlParserService extends DefaultHandler {
     }
 
     /**
-     *
-     * @return
+     * A method to retrieve the latest encountered halftime information
+     * @apiNote This isn't Thread safe
+     * @return latest halftime information
      */
     private HalfTimeInformation latestInformation() {
         List<HalfTimeInformation> halfTimeInformationList = gameInformation.getHalfTimeInformationList();
@@ -135,8 +132,9 @@ public class XmlParserService extends DefaultHandler {
     }
 
     /**
-     *
-     * @return
+     * A method to retrieve the latest encountered football player
+     * @apiNote This isn't Thread safe
+     * @return latest football player
      */
     private FootballPlayer latestPlayer() {
         List<FootballPlayer> footballPlayerList = gameInformation.getFootballPlayerList();
@@ -144,10 +142,16 @@ public class XmlParserService extends DefaultHandler {
         return footballPlayerList.get(latestFootballPlayerIndex);
     }
 
+    /**
+     * Method for triggering SAX parser instance and start of parsing process
+     * @param inputFile XML file to be parsed
+     * @return complete structured object based on XML
+     */
    GameInformation getGameInformation(String inputFile) {
        try {
            //TODO file from client upload
            saxParser.parse(Objects.requireNonNull(this.getClass().getClassLoader().getResourceAsStream("20200223_Heracles_vs_Ajax_20200223_Heracles_vs_Ajax[8730].xml")), this);
+           //optional
            gameInformation.playersMap(gameInformation.getFootballPlayerList());
        } catch (Exception e) {
            e.printStackTrace();

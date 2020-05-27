@@ -10,7 +10,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
- *
+ * Class representing each half time and football player for specific match taken from XML
+ * @author Mass
+ * @see com.ballJamesTask.reactjava.service.XmlParserService
  */
 @Getter
 @Setter
@@ -22,6 +24,11 @@ public class GameInformation {
     private List<FootballPlayer> footballPlayerList;
     private Map<Integer, FootballPlayer> footballPlayerMap = new HashMap<>();
 
+    /**
+     * Method for filling HashMap with data from the list
+     * @param list to create HashMap from
+     * @apiNote This is optional to use
+     */
     public void playersMap(List<FootballPlayer> list) {
         for (FootballPlayer fp : list) {
             footballPlayerMap.put(fp.getId(), fp);

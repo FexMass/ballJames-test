@@ -6,7 +6,8 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 
 /**
- *
+ * Class representing each football player in the match
+ * @author Mass
  */
 @Getter
 @Setter
@@ -22,16 +23,16 @@ public class FootballPlayer {
     public static MathContext mathContext = new MathContext(7);
 
     /**
-     *
-     * @return
+     * Method for avoiding null pointer
+     * @return maxSpeed or 0 if maxSpeed is null
      */
     public BigDecimal getMaxSpeed() {
         return maxSpeed == null ? BigDecimal.valueOf(0) : maxSpeed;
     }
 
     /**
-     *
-     * @return
+     * Method for avoiding null pointer
+     * @return lengthRun or 0 if lengthRun is null
      */
     public BigDecimal getLengthRun() {
         return lengthRun == null ? BigDecimal.valueOf(0) : lengthRun;

@@ -6,7 +6,8 @@ import lombok.Setter;
 import lombok.ToString;
 
 /**
- *
+ * Class for storing each half time information
+ * @author Mass
  */
 @Getter
 @Setter
