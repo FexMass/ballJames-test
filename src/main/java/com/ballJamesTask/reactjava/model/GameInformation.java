@@ -22,16 +22,16 @@ public class GameInformation {
 
     private List<HalfTimeInformation> halfTimeInformationList;
     private List<FootballPlayer> footballPlayerList;
-    private Map<Integer, FootballPlayer> footballPlayerMap = new HashMap<>();
+//    private Map<Integer, FootballPlayer> footballPlayerMap = new HashMap<>();
 
     /**
      * Method for filling HashMap with data from the list
      * @param list to create HashMap from
      * @apiNote This is optional to use
      */
-    public void playersMap(List<FootballPlayer> list) {
-        for (FootballPlayer fp : list) {
-            footballPlayerMap.put(fp.getId(), fp);
-        }
-    }
+//    public void playersMap(List<FootballPlayer> list) {
+//        for (FootballPlayer fp : list) {
+//            footballPlayerMap.put(fp.getId(), fp);
+//        }
+//    }
 }

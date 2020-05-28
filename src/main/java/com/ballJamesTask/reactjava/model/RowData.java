@@ -16,6 +16,6 @@ import java.util.List;
 public class RowData {
 
     private int id;
-    private List<Coordinate> coordinateList = new ArrayList<>();
+    private List<Coordinate> playerCoordinateList = new ArrayList<>();
     private Coordinate ballCoordinate;
 }

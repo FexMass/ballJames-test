@@ -20,5 +20,4 @@ public class HalfTimeInformation {
     private String length;
     private String width;
     private String location;
-    private String value;
 }

@@ -2,6 +2,8 @@ package com.ballJamesTask.reactjava.mapper;
 
 import com.ballJamesTask.reactjava.model.Coordinate;
 import com.ballJamesTask.reactjava.model.RowData;
+import lombok.SneakyThrows;
+
 import java.math.BigDecimal;
 
 /**
@@ -24,20 +26,29 @@ public final class RowDataMapper {
     private static final int Z_POSITION_INDEX = 2;
     private static final int VELOCITY_INDEX = 2;
 
+    private RowDataMapper () {
+        throw new UnsupportedOperationException("Creating objects from this class not allowed.");
+    }
+
     /**
      * Method for mapping line of data separated with regex to RowData object
      * @param rawRowData incoming String line from txt file
      * @return mapped object with data for one line
      */
+    @SneakyThrows
     public static RowData toRowData(String rawRowData) {
         RowData rowData = new RowData();
         String[] splitLine = rawRowData.split(GROUP_DATA_DELIMITER);
+
+        if (splitLine.length != 3) {
+           throw new Exception();
+        }
 
         rowData.setId(Integer.valueOf(splitLine[ROW_ID]));
         rowData.setBallCoordinate(mapToCoordinate(splitLine[BALL_DATA_INDEX].split(DATA_DELIMITER)));
 
         for (String line : splitLine[PLAYER_DATA_INDEX].split(PLAYER_DELIMITER)) {
-            rowData.getCoordinateList().add(mapToCoordinate(line.split(DATA_DELIMITER)));
+            rowData.getPlayerCoordinateList().add(mapToCoordinate(line.split(DATA_DELIMITER)));
         }
 
         return rowData;
@@ -48,7 +59,7 @@ public final class RowDataMapper {
      * @param value to be converted to BigDecimal
      * @return new BigDecimal value
      */
-    private static BigDecimal getBigDecimalValue(String value) {
+    public static BigDecimal getBigDecimalValue(String value) {
         if (value == null) {
             throw new IllegalArgumentException("Null value not allowed to be converted to BigDecimal.");
         }
@@ -65,7 +76,7 @@ public final class RowDataMapper {
      * @return new Coordinate object
      * @see Coordinate
      */
-    private static Coordinate mapToCoordinate(String[] data) {
+    public static Coordinate mapToCoordinate(String[] data) {
         return new Coordinate(
                 getBigDecimalValue(data[X_POSITION_INDEX]),
                 getBigDecimalValue(data[Y_POSITION_INDEX]),
