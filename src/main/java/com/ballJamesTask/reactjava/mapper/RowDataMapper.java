@@ -2,6 +2,7 @@ package com.ballJamesTask.reactjava.mapper;
 
 import com.ballJamesTask.reactjava.model.Coordinate;
 import com.ballJamesTask.reactjava.model.RowData;
+import com.sun.javaws.exceptions.InvalidArgumentException;
 import lombok.SneakyThrows;
 
 import java.math.BigDecimal;
@@ -42,13 +43,16 @@ public final class RowDataMapper {
         String[] splitLine = rawRowData.split(GROUP_DATA_DELIMITER);
 
         if (splitLine.length != 3) {
-           throw new Exception();
+           throw new IllegalArgumentException("input line not valid");
         }
 
         rowData.setId(Integer.valueOf(splitLine[ROW_ID]));
         rowData.setBallCoordinate(mapToCoordinate(splitLine[BALL_DATA_INDEX].split(DATA_DELIMITER)));
 
         for (String line : splitLine[PLAYER_DATA_INDEX].split(PLAYER_DELIMITER)) {
+            if (line.split(DATA_DELIMITER).length != 4) {
+                continue;
+            }
             rowData.getPlayerCoordinateList().add(mapToCoordinate(line.split(DATA_DELIMITER)));
         }
 
@@ -69,7 +73,7 @@ public final class RowDataMapper {
             value = "0";
         }
 
-        return new BigDecimal(value, new MathContext(3));
+        return new BigDecimal(value, new MathContext(5));
     }
 
     /**

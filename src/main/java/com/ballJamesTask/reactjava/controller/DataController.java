@@ -2,7 +2,7 @@ package com.ballJamesTask.reactjava.controller;
 
 import com.ballJamesTask.reactjava.model.FinalResult;
 import com.ballJamesTask.reactjava.service.DataLoaderService;
-import com.sun.istack.NotNull;
+import com.sun.istack.internal.NotNull;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +18,8 @@ import org.springframework.web.multipart.MultipartFile;
 public class DataController {
 
     private DataLoaderService dataLoaderService;
+    private static final int XML_FILE = 0;
+    private static final int CSV_FILE = 1;
 
     public DataController(DataLoaderService dataLoaderService) {
         this.dataLoaderService = dataLoaderService;
@@ -33,10 +35,7 @@ public class DataController {
     @ResponseBody
     public ResponseEntity<HttpStatus> uploadData(@NotNull @RequestParam("file") MultipartFile[] file) {
         try {
-            if (null == file[0] || null == file[1]) {
-                throw new Exception("One of the files is null. It cannot be null!");
-            }
-            dataLoaderService.processMatchData(file[0], file[1]);
+            dataLoaderService.processMatchData(file[XML_FILE], file[CSV_FILE]);
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

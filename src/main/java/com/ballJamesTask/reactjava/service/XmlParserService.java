@@ -3,6 +3,7 @@ package com.ballJamesTask.reactjava.service;
 import com.ballJamesTask.reactjava.model.FootballPlayer;
 import com.ballJamesTask.reactjava.model.GameInformation;
 import com.ballJamesTask.reactjava.model.HalfTimeInformation;
+import lombok.Getter;
 import lombok.SneakyThrows;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,6 +44,7 @@ public class XmlParserService extends DefaultHandler {
     private static final String PLAYERS = "Players";
     private static final String PLAYER = "Player";
 
+    @Getter
     private GameInformation gameInformation;
     private String elementValue;
 
@@ -152,10 +154,12 @@ public class XmlParserService extends DefaultHandler {
      * @return complete structured object based on XML
      */
     @SneakyThrows
-    GameInformation getGameInformation(MultipartFile inputFile) {
+    GameInformation toGameInformation(MultipartFile inputFile) {
         saxParser.parse(inputFile.getInputStream(), this);
         //optional
         //gameInformation.playersMap(gameInformation.getFootballPlayerList());
         return gameInformation;
     }
+
+
 }

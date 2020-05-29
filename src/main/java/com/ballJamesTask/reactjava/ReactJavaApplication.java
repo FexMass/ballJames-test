@@ -10,7 +10,6 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
-import java.util.Arrays;
 import java.util.Collections;
 
 /**
@@ -21,6 +20,11 @@ import java.util.Collections;
 public class ReactJavaApplication {
 	public static void main(String[] args) { SpringApplication.run(ReactJavaApplication.class, args); }
 
+
+	/**
+	 * Configuration to allow CORS actions for Requested URL
+	 * @return bean configuration
+	 */
 	@Bean
 	public FilterRegistrationBean<CorsFilter> simpleCorsFilter() {
 		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();

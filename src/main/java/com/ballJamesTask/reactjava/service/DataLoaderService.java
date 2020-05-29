@@ -39,7 +39,7 @@ public class DataLoaderService {
      */
     public void processMatchData(MultipartFile xmlFile, MultipartFile txtFile) {
 
-        gameInformation = xmlParserService.getGameInformation(xmlFile);
+        gameInformation = xmlParserService.toGameInformation(xmlFile);
 
         readFile(gameInformation.getFootballPlayerList().size(), txtFile);
 
