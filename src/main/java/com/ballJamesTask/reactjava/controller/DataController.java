@@ -33,8 +33,11 @@ public class DataController {
     @CrossOrigin(exposedHeaders = {"Content-Disposition"})
     @RequestMapping(value = "/upload", method = RequestMethod.POST )
     @ResponseBody
-    public ResponseEntity<HttpStatus> uploadData(@NotNull @RequestParam("file") MultipartFile[] file) {
+    public ResponseEntity<HttpStatus> uploadData(@RequestParam("file") MultipartFile[] file) {
         try {
+            if (file[XML_FILE] == null || file[CSV_FILE] == null) {
+                throw new IllegalArgumentException("Arguments cannot be null");
+            }
             dataLoaderService.processMatchData(file[XML_FILE], file[CSV_FILE]);
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
