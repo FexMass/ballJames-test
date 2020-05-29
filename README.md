@@ -4,6 +4,8 @@
  and each file is properly parsed. XML file will be parsed with SAX parser and CSV file will be read line
  by line and map data into objects/mappers in Java. 
  
+ Front end Application repository: https://github.com/FexMass/ballJames-React
+ 
  Application is meant to read following data: 
  * Halftime information (first half start and end, second half
  start and end, date of the played game, location of the match, field size width x length)
