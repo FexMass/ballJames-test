@@ -15,9 +15,6 @@ import org.xml.sax.helpers.DefaultHandler;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
-import java.io.File;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -156,11 +153,9 @@ public class XmlParserService extends DefaultHandler {
      */
     @SneakyThrows
     GameInformation getGameInformation(MultipartFile inputFile) {
-        //TODO file from client upload
-//        File file = new File(System.getProperty("java.io.tmpdir"));
         saxParser.parse(inputFile.getInputStream(), this);
         //optional
-//           gameInformation.playersMap(gameInformation.getFootballPlayerList());
+        //gameInformation.playersMap(gameInformation.getFootballPlayerList());
         return gameInformation;
     }
 }

@@ -8,9 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.util.Arrays;
-
 /**
  * Rest Controller with one method for receiving CSV and XML file to be processed and result to be returned to Client
  * @author Mass
@@ -56,5 +53,4 @@ public class DataController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
-
 }

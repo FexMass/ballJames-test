@@ -7,12 +7,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import org.yaml.snakeyaml.nodes.ScalarNode;
-import sun.rmi.transport.StreamRemoteCall;
 
-import java.io.*;
 import java.math.BigDecimal;
-import java.util.Objects;
 import java.util.Scanner;
 
 /**
@@ -49,6 +45,10 @@ public class DataLoaderService {
 
     }
 
+    /**
+     * Getting all final data and sending to Controller
+     * @return object containing all data
+     */
     public FinalResult getAllMatchData() {
         return new FinalResult(gameInformation);
     }
@@ -98,7 +98,6 @@ public class DataLoaderService {
         boolean flag = false;
 
         while (sc.hasNextLine()) {
-            //TODO Regex Pattern line check
             String line = sc.nextLine();
             RowData currentData = RowDataMapper.toRowData(line);
 

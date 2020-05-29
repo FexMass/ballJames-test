@@ -5,6 +5,7 @@ import com.ballJamesTask.reactjava.model.RowData;
 import lombok.SneakyThrows;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 
 /**
  * Class for mapping String line of data to RowData object
@@ -24,7 +25,7 @@ public final class RowDataMapper {
     private static final int X_POSITION_INDEX = 0;
     private static final int Y_POSITION_INDEX = 1;
     private static final int Z_POSITION_INDEX = 2;
-    private static final int VELOCITY_INDEX = 2;
+    private static final int VELOCITY_INDEX = 3;
 
     private RowDataMapper () {
         throw new UnsupportedOperationException("Creating objects from this class not allowed.");
@@ -60,6 +61,7 @@ public final class RowDataMapper {
      * @return new BigDecimal value
      */
     public static BigDecimal getBigDecimalValue(String value) {
+
         if (value == null) {
             throw new IllegalArgumentException("Null value not allowed to be converted to BigDecimal.");
         }
@@ -67,7 +69,7 @@ public final class RowDataMapper {
             value = "0";
         }
 
-        return new BigDecimal(value);
+        return new BigDecimal(value, new MathContext(3));
     }
 
     /**

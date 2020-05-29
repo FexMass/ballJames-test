@@ -20,7 +20,7 @@ public class FootballPlayer {
     private String shirtNumber;
     private BigDecimal maxSpeed;
     private BigDecimal lengthRun;
-    public static MathContext mathContext = new MathContext(7);
+    public static MathContext mathContext = new MathContext(3);
 
     /**
      * Method for avoiding null pointer

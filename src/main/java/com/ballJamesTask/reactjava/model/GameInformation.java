@@ -5,9 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Class representing each half time and football player for specific match taken from XML

@@ -19,4 +19,5 @@ public class Coordinate {
     private BigDecimal yPosition;
     private BigDecimal zPosition;
     private BigDecimal velocity;
+
 }
