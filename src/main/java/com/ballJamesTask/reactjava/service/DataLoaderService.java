@@ -35,7 +35,6 @@ public class DataLoaderService {
      *
      * @param txtFile CSV file
      * @param xmlFile XML file
-     * @return final object filled with data
      */
     public void processMatchData(MultipartFile xmlFile, MultipartFile txtFile) {
 
@@ -91,7 +90,7 @@ public class DataLoaderService {
      * Method for reading each line in CSV file and mapping required data
      */
     @SneakyThrows
-    private int readFile(int numberOfPayers, MultipartFile inputFile) {
+    private void readFile(int numberOfPayers, MultipartFile inputFile) {
         int errorsOccurred = 0;
         Scanner sc = new Scanner(inputFile.getInputStream(), "UTF-8");
 
@@ -116,7 +115,7 @@ public class DataLoaderService {
                 flag = true;
             }
         }
-        return errorsOccurred;
+        log.info("All lines parsed with {} errors", errorsOccurred);
     }
 
     /**
@@ -146,7 +145,7 @@ public class DataLoaderService {
      * @param yNextPosition     current RowData y2 position
      * @return calculated distance [meters]
      */
-    private BigDecimal calculatePlayerTravel(BigDecimal xPreviousPosition, BigDecimal yPreviousPosition,
+    public BigDecimal calculatePlayerTravel(BigDecimal xPreviousPosition, BigDecimal yPreviousPosition,
                                              BigDecimal xNextPosition, BigDecimal yNextPosition) {
 
         return new BigDecimal(Math.sqrt(
@@ -165,7 +164,7 @@ public class DataLoaderService {
      * @param newSpeed new maxSpeed of player
      * @return bigger maxSpeed
      */
-    private BigDecimal calculateMaxSpeed(BigDecimal oldSpeed, BigDecimal newSpeed) {
+    public BigDecimal calculateMaxSpeed(BigDecimal oldSpeed, BigDecimal newSpeed) {
         return oldSpeed.compareTo(newSpeed) > 0 ? oldSpeed : newSpeed;
     }
 }

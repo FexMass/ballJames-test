@@ -20,4 +20,11 @@ public class Coordinate {
     private BigDecimal zPosition;
     private BigDecimal velocity;
 
+    /**
+     * Method for avoiding null pointer
+     * @return velocity or 0 if velocity is null
+     */
+    public BigDecimal getVelocity() {
+        return velocity == null ? BigDecimal.valueOf(0) : velocity;
+    }
 }
