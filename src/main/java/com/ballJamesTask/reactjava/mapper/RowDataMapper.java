@@ -2,7 +2,6 @@ package com.ballJamesTask.reactjava.mapper;
 
 import com.ballJamesTask.reactjava.model.Coordinate;
 import com.ballJamesTask.reactjava.model.RowData;
-import com.sun.javaws.exceptions.InvalidArgumentException;
 import lombok.SneakyThrows;
 
 import java.math.BigDecimal;

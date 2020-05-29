@@ -5,8 +5,6 @@ import com.ballJamesTask.reactjava.model.GameInformation;
 import com.ballJamesTask.reactjava.model.HalfTimeInformation;
 import lombok.Getter;
 import lombok.SneakyThrows;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.xml.sax.Attributes;
@@ -29,14 +27,11 @@ import java.util.List;
 @Service
 public class XmlParserService extends DefaultHandler {
 
-    private static final Logger log = LoggerFactory.getLogger(XmlParserService.class);
-
     private static final String START = "Start";
     private static final String END = "End";
     private static final String LENGTH = "Length";
     private static final String WIDTH = "Width";
     private static final String LOCATION = "Location";
-    private static final String VALUE = "value";
     private static final String SHIRT_NUMBER = "ShirtNumber";
 
     private static final String SESSIONS = "Sessions";
